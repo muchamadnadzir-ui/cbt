@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CBT</title>
+</head>
+<body>
+
+<h1>CBT Professional</h1>
+
+<script>
+const API =
+'https://script.google.com/macros/s/AKfycbxEgYeufiD1Ws3g8fPLM_QGx8A3dCLrmahjR9rZoMY26_FD_UUEhc0ZIPB3lwb55PhM/exec';
+
+fetch(API,{
+  method:'POST',
+  body:JSON.stringify({
+    action:'test'
+  })
+})
+.then(r=>r.text())
+.then(d=>console.log(d));
+</script>
+
+</body>
+</html>
