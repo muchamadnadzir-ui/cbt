@@ -1,25 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>CBT</title>
-</head>
-<body>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
 
-<h1>CBT Professional</h1>
+<div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-2xl">
+
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-slate-800">
+      CBT Professional
+    </h1>
+
+    <p class="text-slate-500 mt-2">
+      Sistem Ujian Berbasis Komputer
+    </p>
+  </div>
+
+  <input
+    id="username"
+    type="text"
+    placeholder="Username"
+    class="w-full border border-slate-300 p-3 rounded-xl mb-4"
+  >
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Password"
+    class="w-full border border-slate-300 p-3 rounded-xl mb-6"
+  >
+
+  <button
+    onclick="login()"
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl font-semibold"
+  >
+    Login
+  </button>
+
+  <div id="status" class="mt-4 text-center"></div>
+
+</div>
 
 <script>
-const API =
+
+const API_URL =
 'https://script.google.com/macros/s/AKfycbxEgYeufiD1Ws3g8fPLM_QGx8A3dCLrmahjR9rZoMY26_FD_UUEhc0ZIPB3lwb55PhM/exec';
 
-fetch(API,{
-  method:'POST',
-  body:JSON.stringify({
-    action:'test'
-  })
-})
-.then(r=>r.text())
-.then(d=>console.log(d));
+async function login() {
+
+  const username =
+    document.getElementById('username').value;
+
+  const password =
+    document.getElementById('password').value;
+
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'login',
+      username: username,
+      password: password
+    })
+  });
+
+  const data = await response.json();
+
+  if(data.success){
+
+    document.getElementById('status').innerHTML =
+      '<span style="color:green">Login berhasil</span>';
+
+  } else {
+
+    document.getElementById('status').innerHTML =
+      '<span style="color:red">Login gagal</span>';
+  }
+}
+
 </script>
 
 </body>
-</html>
